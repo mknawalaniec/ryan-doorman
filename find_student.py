@@ -183,6 +183,7 @@ def greengrass_infinite_infer_run():
                                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY), 90]  # 90% should be more than enough
                                 _, jpg_data = cv2.imencode('.jpg', person, encode_param)
                                 filename = "incoming/%s" % s3_key  # the guess lambda function is listening here
+                                #response = s3.put_object(Body=jpg_data.tostring(),Bucket=s3_bucket,Key=filename)
                                 response = s3.put_object(ACL='public-read', Body=jpg_data.tostring(),Bucket=s3_bucket,Key=filename)
 
                                 # reset the timer for the next match
